@@ -1,46 +1,48 @@
 # Image Quilting for Texture Synthesis and Transfer
 
-> This project implements a texture synthesis and transfer technique as described in the paper - [Image Quilting for Texture Synthesis and Transfer](https://people.eecs.berkeley.edu/~efros/research/quilting/quilting.pdf) by Alexei A. Efros and Willian T. Freeman
+![Demo](abstract_screenshot.PNG)
 
-You may want to check out the [presentation.pdf](/docs/presentation.pdf) file for more details on this project. It was made as the final project for CS 663 - **Digital Image Processing** course in Autumn 2018 at Indian Institute of Technology (IIT) Bombay, India.
+https://www.youtube.com/watch?v=QMiCNJofJUk
 
-## Getting Started
+Image quilting is a technique of generating new images 
+by stitching together patches of existing images.
+It has applications of 
 
-Follow the instructions below to get our project running on your local machine.
+1) Texture synthesis, generating arbitrarily large textures from small real-world samples and 
 
-1. Run `/src/synthesis.m` file for texture synthesis and `/src/transfer.m` file for texture transfer.
-2. Replace the first line/lines with respective input image paths to generate the output images.
+2) Texture transfer, re-rendering an image in the style of another.
 
-## Results
+>The method
+works directly on the images and does not require 3D information.
 
-### Synthesis
+For more information, consult the original paper at https://people.eecs.berkeley.edu/~efros/research/quilting.html
 
-| Input Texture                              | Output (Quilted Texture)                    | Input Texture                              | Output (Quilted Texture)                    |
-| ------------------------------------------ | ------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+All images in this readme come from the original paper or presentation at SIGGRAPH '01.
 
-### Transfer
+In this repository, we will be implementing the paper using Python and NumPy.
 
-| Input Texture | Input Image | Output |
-| ---------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------- |
-|                                              |                                             |                                                       |
-|                                                  |                                                 |                                                        |
-|                                                  |                                               |                                                       |
+## Texture Synthesis
 
+The algorithm starts with an input image and a block size:
 
-## Authors
+![input block](input.png)
 
-* Aditi Pathak (https://github.com/aditi2199/)
+We then define a minimum cost path between the overlap of two blocks:
 
-## Acknowledgements
+<img src="slide.png" width=500 />
 
-- **[Prof. Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/)** for the amazing database of test images found [here](https://people.eecs.berkeley.edu/~efros/research/quilting/figs/).
+We then build up a synthesized image by tiling small blocks of the input image.
 
-## License
+![build](build.png)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+(a) Here, we just randomly choose blocks
+
+(b) Here we pick blocks that have the least overlap error
+
+(c) We do everything in (c) but also cut along the minimum error boundary.
+
+## Texture Transfer
+
+>[Here] just add another constraint when sampling: similarity to underlying image at that spot
+
+![half](half.png)
