@@ -1,9 +1,5 @@
 # Image Quilting for Texture Synthesis and Transfer
 
-![Demo](abstract_screenshot.PNG)
-
-https://www.youtube.com/watch?v=QMiCNJofJUk
-
 Image quilting is a technique of generating new images 
 by stitching together patches of existing images.
 It has applications of 
