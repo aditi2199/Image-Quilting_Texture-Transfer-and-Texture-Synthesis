@@ -21,7 +21,8 @@ In this repository, we will be implementing the paper using Python and NumPy.
 
 The algorithm starts with an input image and a block size:
 
-![input block](input.png)
+![input block](input.png)![Uploading half.png…]()
+
 
 We then define a minimum cost path between the overlap of two blocks:
 
