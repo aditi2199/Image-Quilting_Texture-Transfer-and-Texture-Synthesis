@@ -1,28 +1,48 @@
-# ImageQuilting_TextureTransferTextureSynthesis
-Image Quilting Algorithm*:
-○ Go through the image to be synthesized in raster scan order in steps of one block (minus the 
-overlap).
-○ For every location, search the input texture for a set of blocks that satisfy the overlap 
-constraints (above and left) within some error tolerance. Randomly pick one such block. 
-○ Compute the error surface between the newly chosen block and the old blocks at the overlap 
-region. Find the minimum cost path along this surface and make that the boundary of the new 
-block. Paste the block onto the texture. Repeat
+# Image Quilting for Texture Synthesis and Transfer
 
-Minimum Error Boundary Cut
-Ei,j = ei,j + min(Ei-1,j-1, Ei-1,j, Ei-1,j+1)
-● After DP above, in the end, the minimum value of the last row in E will indicate 
-the end of the minimal vertical path though the surface and we can trace back 
-and find the path of the best cut through the overlapped region.
+> This project implements a texture synthesis and transfer technique as described in the paper - [Image Quilting for Texture Synthesis and Transfer](https://people.eecs.berkeley.edu/~efros/research/quilting/quilting.pdf) by Alexei A. Efros and Willian T. Freeman
+
+You may want to check out the [presentation.pdf](/docs/presentation.pdf) file for more details on this project. It was made as the final project for CS 663 - **Digital Image Processing** course in Autumn 2018 at Indian Institute of Technology (IIT) Bombay, India.
+
+## Getting Started
+
+Follow the instructions below to get our project running on your local machine.
+
+1. Run `/src/synthesis.m` file for texture synthesis and `/src/transfer.m` file for texture transfer.
+2. Replace the first line/lines with respective input image paths to generate the output images.
+
+## Results
+
+### Synthesis
+
+| Input Texture                              | Output (Quilted Texture)                    | Input Texture                              | Output (Quilted Texture)                    |
+| ------------------------------------------ | ------------------------------------------- | ------------------------------------------ | ------------------------------------------- |
+| ![apples.png](inputs/synthesis/apples.png) | ![apples.png](outputs/synthesis/apples.png) | ![bricks.png](inputs/synthesis/bricks.png) | ![bricks.png](outputs/synthesis/bricks.png) |
+| ![cans.png](inputs/synthesis/cans.png) | ![cans.png](outputs/synthesis/cans.png) | ![chocolate.png](inputs/synthesis/chocolate.png) | ![chocolate.png](outputs/synthesis/chocolate.png) |
+| ![jute.png](inputs/synthesis/jute.png) | ![jute.png](outputs/synthesis/jute.png) | ![mat.png](inputs/synthesis/mat.png) | ![mat.png](outputs/synthesis/mat.png) |
+| ![rice.png](inputs/synthesis/rice.png) | ![rice.png](outputs/synthesis/rice.png) | ![spots.png](inputs/synthesis/spots.png) | ![spots.png](outputs/synthesis/spots.png) |
+| ![stones.png](inputs/synthesis/stones.png) | ![stones.png](outputs/synthesis/stones.png) | ![text.png](inputs/synthesis/text.png) | ![text.png](outputs/synthesis/text.png) |
+| ![tomatoes.png](inputs/synthesis/tomatoes.png) | ![tomatoes.png](outputs/synthesis/tomatoes.png) | ![windows.png](inputs/synthesis/windows.png) | ![windows.png](outputs/synthesis/windows.png) |
+
+### Transfer
+
+| Input Texture | Input Image | Output |
+| ---------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------- |
+| ![rice.png](inputs/transfer/rice.png)                                                    | ![bill.png](inputs/transfer/bill.png)                                                  | ![bill-rice.png](outputs/transfer/bill-rice.png)                                                        |
+| ![fabric.png](inputs/transfer/fabric.png)                                                    | ![girl.png](inputs/transfer/girl.png)                                                  | ![girl-fabric.png](outputs/transfer/girl-fabric.png)                                                        |
+| ![orange.png](inputs/transfer/orange.png)                                                    | ![potato.png](inputs/transfer/potato.png)                                                  | ![potato-orange.png](outputs/transfer/potato-orange.png)                                                        |
 
 
-Texture Transfer
-● If we modify the synthesis algorithm by requiring that each patch satisfy a 
-desired correspondence map, C , as well as satisfy the texture synthesis 
-requirements, we can use it for texture transfer.
-● The correspondence map is a spatial map of some corresponding quantity 
-over both the texture source image and a controlling target image.
-● For texture transfer, image being synthesized must respect two independent 
-constraints:
-○ (a) the output are legitimate, synthesized examples of the source texture
-○ (b) that the correspondence image mapping is respected.
-● Hence, we modify the error term by the use of an ‘alpha’ parameter.
+## Authors
+
+* **Vamsi Krishna Reddy Satti** - [vamsi3](https://github.com/vamsi3)
+* Vighnesh Reddy Konda - [scopegeneral](https://github.com/scopegeneral)
+* Suraj Soni
+
+## Acknowledgements
+
+- **[Prof. Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/)** for the amazing database of test images found [here](https://people.eecs.berkeley.edu/~efros/research/quilting/figs/).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
